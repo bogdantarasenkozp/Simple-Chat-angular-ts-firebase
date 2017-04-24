@@ -9,6 +9,8 @@ import { AngularFire, AuthProviders, AuthMethods,FirebaseListObservable } from '
 export class AppComponent {
   items: FirebaseListObservable<any>;
   name: any;
+  username: string;
+  isLoggedIn: boolean;
   msgVal: string = '';
 
   constructor(public af: AngularFire) {
@@ -21,24 +23,20 @@ export class AppComponent {
     this.af.auth.subscribe(auth => {
       if(auth) {
         this.name = auth;
+        this.username = auth.facebook.displayName;
+        this.isLoggedIn = true;
+      }else{
+        this.isLoggedIn = false;
       }
     });
   }
 
-  login() {
-    this.af.auth.login({
-      provider: AuthProviders.Facebook,
-      method: AuthMethods.Popup
-    })
-  }
-
-  logout() {
-     this.af.auth.logout();
-  }
-
   chatSend(theirMessage: string) {
+    console.log('here')
+    console.log(theirMessage)
     this.items.push({ message: theirMessage, name: this.name.facebook.displayName});
     this.msgVal = '';
   }
+
 
 }

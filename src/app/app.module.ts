@@ -4,6 +4,12 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
+import { loginComponent } from './login/login.component';
+import { inputComponent } from './input/input.component';
+import { msgListComponent } from './msglist/msglist.component';
+
+import { AuthService } from './providers/auth.service';
+
 import { AngularFireModule } from 'angularfire2';
 
 export const firebaseConfig = {
@@ -18,7 +24,10 @@ export const firebaseConfig = {
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    loginComponent,
+    inputComponent,
+    msgListComponent
   ],
   imports: [
     BrowserModule,
@@ -26,7 +35,7 @@ export const firebaseConfig = {
     HttpModule,
     AngularFireModule.initializeApp(firebaseConfig)
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

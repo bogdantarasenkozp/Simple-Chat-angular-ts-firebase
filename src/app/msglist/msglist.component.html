@@ -1,0 +1,4 @@
+<div class="chat-container" *ngFor="let msg of msgs | async">
+  <a href="#">{{msg.name}}</a>
+  <p>{{msg.message}}</p>
+</div>
